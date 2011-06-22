@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Mark Mulder"]
   s.email       = ["markmulder@gmail.com"]
-  s.homepage    = "http://ikbenbitterzoet.com"
+  s.homepage    = "https://github.com/bittersweet/stopwatch"
   s.summary     = "Show the page load duration."
-  s.description = "This gem uses Rack middleware and the Rails 3 instrumentation to display page load time."
+  s.description = "This gem uses Rack middleware and the Rails 3 Notification API to display page load time and amount of queries executed."
 
   s.rubyforge_project = "stopwatch"
 

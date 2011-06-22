@@ -8,7 +8,7 @@ executed
 
 just add the following to the development group in your Gemfile.
 
-  gem 'stopwatch', :git => https://github.com/bittersweet/stopwatch
+  gem 'stopwatch'
 
 == Caveats
 
