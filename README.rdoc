@@ -1,0 +1,20 @@
+= Stopwatch
+
+This is a simple gem to load a Rack middleware that works together with the
+Rails 3 Notification API to display the page load time and amount of queries
+executed
+
+== Installation
+
+just add the following to the development group in your Gemfile.
+
+  gem 'stopwatch', :git => https://github.com/bittersweet/stopwatch
+
+== Caveats
+
+* It removes etags so we can display it fresh every page load, otherwise the response would get cached by the browser because Rails would return a 304 Not Modified.
+
+== Todo
+
+* Basic configuration
+* Differentiate between cached and non-cached queries
