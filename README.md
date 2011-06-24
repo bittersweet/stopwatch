@@ -10,7 +10,8 @@ Just add the following to your __development__ group and you are good to go:
 gem 'stopwatch'
 ```
 
-Every page will now display the duration in the upper right corner and the amount of queries. 
+Every page will now display the duration in the upper right corner and the
+amount of (non-cached) queries.
 
 ![Stopwatch in action](https://github.com/bittersweet/stopwatch/raw/master/stopwatch.png)
 
@@ -44,7 +45,6 @@ Modified and you wouldn't see any changes on page refresh.
 ## Todo
 
 * Basic configuration
-* Differentiate between cached and non-cached queries
 
 ## Thanks
 

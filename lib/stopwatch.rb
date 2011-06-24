@@ -14,8 +14,8 @@ module Stopwatch
         StopwatchLog.event = ActiveSupport::Notifications::Event.new(*args)
       end
 
-      ActiveSupport::Notifications.subscribe "sql.active_record" do |*args|
-        StopwatchLog.increment_query_count
+      ActiveSupport::Notifications.subscribe "sql.active_record" do |name, start, finish, id, payload|
+        StopwatchLog.increment_query_count if payload[:name] != "CACHE"
       end
     end
   end
