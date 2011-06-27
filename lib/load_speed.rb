@@ -9,7 +9,8 @@ module Rack
       status, headers, response = @app.call(env)
 
       if status == 200
-        body = response.body
+        body = ""
+        response.each {|part| body << part}
         index = body.rindex("</body>")
         if index
           body.insert(index, performance_code)
