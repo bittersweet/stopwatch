@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "Navigation" do
   include Capybara
 
-  it "should be a valid app" do
+  it "renders the stopwatch box" do
     visit "/"
-    page.should have_content("You found me")
+    page.should have_css("#performance_code")
   end
 end
