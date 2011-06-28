@@ -25,10 +25,12 @@ module Rack
   protected
 
     def performance_code
-      events = "<table><tr><td>view</td><td>duration</td><td>queries</td></tr>"
+      events = "<table id='performance_table'><tr><td></td><td>duration (ms)</td><td>queries</td></tr>"
       StopwatchLog.events.each do |event|
         events << "<tr><td>#{event.template}</td><td>#{event.duration}</td><td>#{event.query_count}</td></tr>"
       end
+      event = StopwatchLog.event
+      events << "<tr><td>#{event.payload[:path]}</td><td>#{event.duration}</td><td>#{StopwatchLog.query_count}</td></tr>"
       events << "</table>"
 
       html = <<-EOF
@@ -39,6 +41,7 @@ module Rack
     top: 0;
     right: 0;
     height: 25px;
+    width: 140px;
     overflow: hidden;
     background-color: #DE7A93;
     color: white;
@@ -53,6 +56,13 @@ module Rack
     height: auto;
     width: auto;
     padding-bottom: 10px;
+  }
+
+  table#performance_table {
+  }
+
+  table#performance_table td {
+    padding-right: 15px;
   }
 </style>
 <div id="performance_code">
