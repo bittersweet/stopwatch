@@ -7,26 +7,33 @@ module Stopwatch
     initializer "newplugin.initialize" do |app|
       app.config.middleware.use "Rack::LoadSpeed"
 
+      # Start processing
       ActiveSupport::Notifications.subscribe "start_processing.action_controller" do |*args|
         StopwatchLog.reset_query_count
+        StopwatchLog.reset_sub_query_count
         StopwatchLog.reset_events
       end
 
-      ActiveSupport::Notifications.subscribe "process_action.action_controller" do |*args|
-        StopwatchLog.event = ActiveSupport::Notifications::Event.new(*args)
-      end
-
+      # Every query
       ActiveSupport::Notifications.subscribe "sql.active_record" do |name, start, finish, id, payload|
-        StopwatchLog.increment_query_count if payload[:name] != "CACHE"
-        StopwatchLog.increment_sub_query_count if payload[:name] != "CACHE"
+        if payload[:name] != "CACHE"
+          StopwatchLog.increment_query_count
+          StopwatchLog.increment_sub_query_count
+        end
       end
 
+      # Every partial render
       ActiveSupport::Notifications.subscribe "render_partial.action_view" do |*args|
         event = ActiveSupport::Notifications::Event.new(*args)
         stopwatch_event = StopwatchEvent.new(event)
         stopwatch_event.query_count = StopwatchLog.sub_query_count
         StopwatchLog.events << stopwatch_event
         StopwatchLog.reset_sub_query_count
+      end
+
+      # End of processing
+      ActiveSupport::Notifications.subscribe "process_action.action_controller" do |*args|
+        StopwatchLog.event = ActiveSupport::Notifications::Event.new(*args)
       end
     end
   end
