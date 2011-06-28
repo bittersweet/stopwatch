@@ -6,7 +6,11 @@ class StopwatchEvent
   end
 
   def template
-    @event.payload[:identifier].gsub(/.*\/app\/views\//, "")
+    if @event.payload[:virtual_path]
+      @event.payload[:virtual_path]
+    else
+      @event.payload[:identifier].gsub(/.*\/app\/views\//, "")
+    end
   end
 
   def duration

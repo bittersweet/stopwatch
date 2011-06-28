@@ -23,8 +23,8 @@ module Stopwatch
       end
 
       # Every partial render
-      ActiveSupport::Notifications.subscribe "render_partial.action_view" do |*args|
-        event = ActiveSupport::Notifications::Event.new(*args)
+      ActiveSupport::Notifications.subscribe(/render/) do |name, start, finish, id, payload|
+        event = ActiveSupport::Notifications::Event.new(name, start, finish, id, payload)
         stopwatch_event = StopwatchEvent.new(event)
         stopwatch_event.query_count = StopwatchLog.sub_query_count
         StopwatchLog.events << stopwatch_event
