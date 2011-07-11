@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Navigation" do
-  include Capybara
+  include Capybara::DSL
 
   it "renders the stopwatch box" do
     visit "/"
