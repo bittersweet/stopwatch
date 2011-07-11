@@ -1,0 +1,17 @@
+bundler_args: --binstubs
+
+rvm:
+  - 1.8.7
+  - 1.9.2
+  - ree
+
+script: "bundle exec rspec spec"    
+
+notifications:
+  recipients:
+    - markmulder@gmail.com
+
+branches:
+  only:
+    - master
+
