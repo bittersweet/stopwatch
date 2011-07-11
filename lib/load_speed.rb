@@ -26,11 +26,11 @@ module Rack
 
     def performance_code
       events = "<table id='performance_table'><tr><td></td><td>duration (ms)</td><td>queries</td></tr>"
-      StopwatchLog.events.each do |event|
+      Stopwatch::Log.events.each do |event|
         events << "<tr><td>#{event.template}</td><td>#{event.duration}</td><td>#{event.query_count}</td></tr>"
       end
-      event = StopwatchLog.event
-      events << "<tr><td>#{event.payload[:path]}</td><td>#{event.duration}</td><td>#{StopwatchLog.query_count}</td></tr>"
+      event = Stopwatch::Log.event
+      events << "<tr><td>#{event.payload[:path]}</td><td>#{event.duration}</td><td>#{Stopwatch::Log.query_count}</td></tr>"
       events << "</table>"
 
       html = <<-EOF
@@ -66,8 +66,8 @@ module Rack
   }
 </style>
 <div id="performance_code">
-  <strong>#{StopwatchLog.event.duration.to_i}</strong> ms
-  <strong>#{StopwatchLog.query_count}</strong> queries
+  <strong>#{Stopwatch::Log.event.duration.to_i}</strong> ms
+  <strong>#{Stopwatch::Log.query_count}</strong> queries
   #{events}
 </div>
 EOF
