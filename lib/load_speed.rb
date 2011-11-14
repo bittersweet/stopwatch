@@ -8,7 +8,7 @@ module Rack
       env.delete("HTTP_IF_NONE_MATCH")
       status, headers, response = @app.call(env)
 
-      if status == 200
+      if status == 200 && headers["Content-Type"] =~ /text\/html|application\/xhtml\+xml/
         body = ""
         response.each {|part| body << part}
         index = body.rindex("</body>")

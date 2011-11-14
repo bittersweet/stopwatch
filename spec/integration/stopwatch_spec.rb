@@ -7,4 +7,9 @@ describe "Navigation" do
     visit "/"
     page.should have_css("#performance_code")
   end
+
+  it "does not insert html" do
+    visit "/javascript_test"
+    page.should_not have_css("#performance_code")
+  end
 end
