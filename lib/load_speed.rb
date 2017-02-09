@@ -14,7 +14,10 @@ module Rack
         index = body.rindex("</body>")
         if index
           body.insert(index, performance_code)
-          headers["Content-Length"] = body.length.to_s
+          #
+          # handle body w/ UTF8 characters for Ruby 1.9+ to avoid Rack::Lint::LintError
+          #
+          headers["Content-Length"] = (body.respond_to?(:bytesize) ? body.bytesize : body.length).to_s
           response = [body]
         end
       end
