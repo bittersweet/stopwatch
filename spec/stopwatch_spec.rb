@@ -1,5 +1,10 @@
+# encoding: utf-8
+#
 require_relative './../lib/stopwatch'
 require_relative './../lib/load_speed'
+
+require 'rack/lint'
+require "rack/mock"
 
 describe Rack::LoadSpeed do
   it 'inserts performance data' do
@@ -28,5 +33,13 @@ describe Rack::LoadSpeed do
 
     body = response[2][0]
     expect(body).to eq "{'id': '1'}"
+  end
+
+  it 'check content-length via Rack::Lint' do
+    app = lambda { |env| [200, {'Content-Type' => 'text/html'}, ["<html><body>snowman ☃</body></html>"]]}
+    loadspeed = Rack::LoadSpeed.new(app)
+    request = Rack::MockRequest.new(Rack::Lint.new(loadspeed))
+    response = request.get('/')
+    expect(response.status).to eq 200
   end
 end
