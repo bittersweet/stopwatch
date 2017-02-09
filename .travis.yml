@@ -1,17 +1,6 @@
-bundler_args: --binstubs
-
+sudo: false
+language: ruby
 rvm:
-  - 1.8.7
-  - 1.9.2
-  - ree
-
-script: "bundle exec rspec spec"    
-
-notifications:
-  recipients:
-    - markmulder@gmail.com
-
-branches:
-  only:
-    - master
-
+  - 2.3.3
+  - 2.2.6
+  - 1.9.3-p551
