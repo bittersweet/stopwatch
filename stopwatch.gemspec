@@ -18,4 +18,8 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  # Keep the rack dependency low so we can still test 1.8.x
+  s.add_development_dependency "rack", "~> 1.6.5"
+  s.add_development_dependency "rspec", "~> 3.5.0"
 end

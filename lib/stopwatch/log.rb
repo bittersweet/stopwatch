@@ -1,14 +1,29 @@
-require 'active_support/core_ext'
-
 module Stopwatch
   class Log
     @@query_count = 0
     @@sub_query_count = 0
     @@events = []
 
-    cattr_accessor :event
-    cattr_accessor :events
-    cattr_accessor :query_count
+    def self.event
+      @@event
+    end
+    def self.event=(event)
+      @@event = event
+    end
+
+    def self.events
+      @@events
+    end
+    def self.events=(events)
+      @@events = events
+    end
+
+    def self.query_count
+      @@query_count
+    end
+    def self.query_count=(query_count)
+      @@query_count = query_count
+    end
 
     def self.sub_query_count
       @@sub_query_count
