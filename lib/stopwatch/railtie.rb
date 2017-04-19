@@ -1,7 +1,7 @@
 module Stopwatch
   class Railtie < Rails::Railtie
     initializer "newplugin.initialize" do |app|
-      app.config.middleware.use "Rack::LoadSpeed"
+      app.config.middleware.use Rack::LoadSpeed
 
       # Start processing
       ActiveSupport::Notifications.subscribe "start_processing.action_controller" do |*args|
