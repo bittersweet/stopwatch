@@ -1,3 +1,6 @@
+### v1.0.1
+  * No longer uses a string to load the middleware, thanks again @erikj !
+
 ### v1.0.0
   * Handles UTF-8 characters in body, thanks @erikj for https://github.com/bittersweet/stopwatch/pull/2 !
 
